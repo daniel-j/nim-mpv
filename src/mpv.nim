@@ -33,6 +33,7 @@ proc set_option*(ctx: ptr handle, name: string, value: string) =
 
 proc get_property*(ctx: ptr handle, name: string): string =
   var val: cstring
+  defer: free(val)  
   check_error ctx.get_property(name, mpv.FORMAT_STRING, val.addr)
   return $val
 
